@@ -108,8 +108,8 @@ Institutions generate their own document hashes (SHA-256) via the frontend, ensu
 ### 📸 Smart Contract Dashboard
 > *Live activity and on-chain details directly from Stellar Expert:*
 
-[![Smart Contract Dashboard](<img width="1911" height="907" alt="566147397-ba006665-c388-46a5-a714-022cc490237b" src="https://github.com/user-attachments/assets/b0112667-2d72-4c36-a8fb-1cf51b912153" />
-)
+<img width="1911" height="907" alt="566147397-ba006665-c388-46a5-a714-022cc490237b" src="https://github.com/user-attachments/assets/b0112667-2d72-4c36-a8fb-1cf51b912153" />
+
 
 *(Click to view real-time smart contract data)*
 
