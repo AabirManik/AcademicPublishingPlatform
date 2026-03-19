@@ -1,185 +1,160 @@
-# 🌌 Academic Publishing Platform
+# 🎓 Academic Publishing Platform
 
-### ✨ Powered by Soroban Smart Contracts on Stellar
+![Soroban](https://img.shields.io/badge/Blockchain-Stellar%20Soroban-8A2BE2?style=for-the-badge&logo=stellar)
+![Rust](https://img.shields.io/badge/Language-Rust-F74C00?style=for-the-badge&logo=rust)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
----
-
-## 🚀 Overview
-
-![Image](https://www.frontiersin.org/files/Articles/486144/fbloc-02-00019-HTML/image_m/fbloc-02-00019-g001.jpg)
-
-![Image](https://cdn.dribbble.com/userupload/14973567/file/original-038165de0f42a16ed9bdb61f90aed042.png?resize=752x\&vertical=center)
-
-![Image](https://images.openai.com/static-rsc-3/KBWnQxLuiMawsET1HgNjDR9yGKsJwwZRcyfQE9NSRM1zovBU3X1yoBeMdFBpzrT-RtC3QUqDfczbnDq8vfGHov_aPFK-9mw9Q-HhbawERAA?purpose=fullsize\&v=1)
-
-![Image](https://images.openai.com/static-rsc-3/62bZMQZuoVZobLPfiQgLsUtpyfovAVXB0w0bwwtiOzM_7M02FCMPkGOPAy-l3Jwnm7C5UPErtYDghfIQOiRB1NebRSLEs9Qsrf5TI_N1sfA?purpose=fullsize\&v=1)
-
-A **decentralized academic publishing platform** that empowers researchers, students, and innovators to publish and review research papers on-chain using **Soroban smart contracts**.
-
-🔐 No central authority
-📜 Immutable records
-🌍 Global accessibility
-
-> Transforming how knowledge is published, verified, and owned.
+The **Academic Publishing Platform** is an institutional-grade, fully decentralized **Soroban smart contract** infrastructure. It empowers researchers, universities, and journals to publish, issue, and verify academic papers and credentials securely on the Stellar blockchain. Every publication is structurally immutable, tamper-proof, and accessible globally.
 
 ---
 
-## 🧾 Project Description
+## 📖 What is this?
 
-Traditional academic publishing is slow, expensive, and controlled by centralized entities.
+Traditional academic publishing suffers from high fees, paywalls, and opaque peer-review processes. The Academic Publishing Platform leverages the Stellar network to tokenize and verify academic work, establishing a permanent, fraud-proof registry of scholarly articles and certificates on-chain.
 
-This project solves that by:
-
-* Removing intermediaries
-* Ensuring **transparent peer review**
-* Providing **verifiable ownership of research**
-
-Built on the **Stellar blockchain**, this platform ensures trust, speed, and scalability.
-
----
-
-## ⚙️ What It Does
-
-![Image](https://www.qualitymatters.org/sites/default/files/article-faq-images/figure-at-computer-screen-checklist-500px.png)
-
-![Image](https://www.lyellcollection.org/pb-assets/html-assets/publishing-hub/peer-review-process/GSL_08.0.figure-1773307453170.jpeg)
-
-![Image](https://miro.medium.com/1%2ARmXSIYZ5IznLSEQtaxn2Lg.png)
-
-![Image](https://miro.medium.com/0%2Ay4cxHrw6BL9oQbEd.jpg)
-
-✔️ Submit research papers
-✔️ Store paper references securely (IPFS hash)
-✔️ Enable peer review system
-✔️ Retrieve and verify published work
-✔️ Maintain tamper-proof records
+Give it a unique publication hash (e.g., `e3b0c442...`) — it automatically:
+- **Validates** the request via the lightning-fast Stellar Soroban network.
+- **Verifies** the core existence of the unique document hash on an immutable ledger.
+- **Retrieves** authorship and ownership details tied directly to the hash in real-time.
+- **Logs** the verification strictly on-chain, guaranteeing 100% auditability.
+- **Returns** a definitive valid/invalid status upon blockchain settlement confirmation.
 
 ---
 
-## ✨ Features
+## 🔑 Why Soroban?
+*The technical backbone for high-performance academic validation*
 
-### 📄 Paper Submission
+Traditional blockchains face exorbitant gas fees making mass-publishing unviable. Our switch to **Stellar Soroban** provides:
 
-Upload your research with title + content hash
+| Feature | Traditional Chains | 🚀 With Soroban |
+| :--- | :--- | :--- |
+| **Transaction Fees** | High & Unpredictable | ✅ **Near-Zero & Predictable** |
+| **Execution Speed** | Seconds to Minutes | ✅ **Local-speed Sub-second** |
+| **Type Safety** | Varies by Language | ✅ **Rust-based Security** |
+| **Storage Model** | Expensive/Monolithic | ✅ **Optimized Instance Storage** |
+| **Ecosystem** | Fragmented | ✅ **Unified Stellar Network** |
 
-### 🔍 Paper Retrieval
-
-Fetch any paper instantly using author + title
-
-### 🧑‍⚖️ Peer Review
-
-Approve / reject papers transparently
-
-### 🔐 Immutable Storage
-
-Once stored → **cannot be changed**
-
-### 🌐 Fully Decentralized
-
-No central authority controls your work
+### Core Soroban Capabilities Utilized:
+- **`instance()` Storage** — Maintains persistent, highly efficient publication-to-author mappings.
+- **SHA256 Hashing** — Uses Soroban’s native native capabilities to secure document fingerprints natively.
+- **`symbol_short!()`** — Greatly optimizes on-chain memory footprint.
+- **Env SDK** — Enables direct, low-overhead interactions with the global Stellar ledger state.
 
 ---
 
-## 🏗️ Tech Stack
+## 🏗️ System Architecture
 
-![Image](https://images.openai.com/static-rsc-3/Xz6E3GPdvXkoETsVacVbxvHAXY1AudYxlgfAYdTC6Nl_5vfRkN5kIfZdpgv6uN5wgtISpOiU3gnmZ63x__BKRqCqcsW1cTiW7L4AreTtScE?purpose=fullsize\&v=1)
+Our solution is elegantly divided into high-speed on-chain capabilities and flexible off-chain access:
 
-![Image](https://rust-lang.org/logos/rust-logo-512x512.png)
+### 1. Smart Contract (On-chain) Flow
+The core logic is written cleanly in a Rust Smart Contract (`AcademicPublisher`). It contains three main paths:
+- `publish_paper(env, doc_hash, author)`: Permanently locks the unique document hash to the verifiable author.
+- `verify_publication(env, doc_hash)`: Queries the on-chain storage to instantly authenticate if a document hash exists.
+- `get_author(env, doc_hash)`: Identifies the original publisher/author of a verified document hash.
 
-![Image](https://mma.prnewswire.com/media/1919262/Soroban_Logo.jpg?p=facebook)
+### 2. Data Structure & Immutability
+The platform maps records using Soroban's native `Map<String, String>` directly into the instance storage. This precise design guarantees `O(1)` lookups and absolute mutability resistance.
 
-![Image](https://cdn.sanity.io/images/e2r40yh6/production-i18n/9efff1148a700ff4fff29d63cd8e88af53c52a51-1668x1001.png)
-
-* ⚡ **Soroban** – Smart Contracts on Stellar
-* 🦀 **Rust** – Secure & performant backend
-* 🌌 **Stellar Blockchain** – Fast & low-cost transactions
-* 📦 **IPFS (Future)** – Decentralized file storage
-
----
-
-## 🔗 Deployed Smart Contract
-
-🚀 **Live Contract Link:**
-👉 https://stellar.expert/explorer/testnet/contract/CDCL2NGXHLTX5B76LAFQZGXNAN6Y46OP4RNIVBHZZOQYL6ESN35O75S6
-
-*(Update this after deployment)*
+### 3. Off-Chain Verifier
+Institutions generate their own document hashes (SHA-256) via the frontend, ensuring large PDFs or datasets remain completely off-chain, preserving privacy and keeping network usage hyper-optimized.
 
 ---
 
-## 🧪 Example Use Case
+## 🛠️ Tech Stack & Tools
 
-1. Researcher uploads paper → gets stored on-chain
-2. Reviewer evaluates → submits approval/rejection
-3. Anyone can verify authenticity
-4. Ownership is permanently recorded
-
----
-
-## 📌 Future Improvements
-
-![Image](https://www.investopedia.com/thmb/l2j8YJCSMMDYfs7KTjUUvRx9Lf4%3D/1500x0/filters%3Ano_upscale%28%29%3Amax_bytes%28150000%29%3Astrip_icc%28%29/crypto-token.asp-v5-6774f213bd3b4deaac537f196990edff.png)
-
-![Image](https://cdn.prod.website-files.com/663a011a75c99dd4890549b8/68108c966d5e4b1e929e7d29_DAO_Voting_mechanism.webp)
-
-![Image](https://today.duke.edu/sites/default/files/legacy-files/styles/story_body/public/nftcert.jpg?itok=VSzfAFDP)
-
-![Image](https://i1.rgstatic.net/publication/358763243_NFTCert_NFT-Based_Certificates_With_Online_Payment_Gateway/links/621454ec6c472329dcfcee06/largepreview.png)
-
-* 💰 Token-based incentives (reward reviewers)
-* ⭐ Reputation system (authors & reviewers)
-* 🌐 Full IPFS integration (store actual papers)
-* 🏛️ DAO governance (community-driven publishing)
-* 🖼️ NFT-based ownership certificates
+- **Rust**: Lightning-fast core language for the Soroban smart contract.
+- **Soroban-SDK**: Fully-featured framework for Stellar contracts.
+- **Stellar CLI**: Essential terminal interactions, deployment, and network invocation.
+- **Stellar Expert Explorer**: Comprehensive contract tracking and statistical state views.
+- **SHA256 Cryptography**: One-way academic document fingerprinting.
 
 ---
 
-## 🎯 Why This Matters
+## 🔗 Deployed Contract
 
-> “Knowledge should be open, verifiable, and owned by its creators.”
+- **Contract Address:** `CDCL2NGXHLTX5B76LAFQZGXNAN6Y46OP4RNIVBHZZOQYL6ESN35O75S6`
+- **View on Network:** [Stellar Expert Explorer (Testnet)](https://stellar.expert/explorer/testnet/contract/CDCL2NGXHLTX5B76LAFQZGXNAN6Y46OP4RNIVBHZZOQYL6ESN35O75S6)
 
-This platform:
+### 📸 Smart Contract Dashboard
+> *Live activity and on-chain details directly from Stellar Expert:*
 
-* Eliminates publishing barriers
-* Builds trust through transparency
-* Empowers global researchers
+[![Smart Contract Dashboard](https://image.thum.io/get/width/1000/crop/800/https://stellar.expert/explorer/testnet/contract/CDCL2NGXHLTX5B76LAFQZGXNAN6Y46OP4RNIVBHZZOQYL6ESN35O75S6)](https://stellar.expert/explorer/testnet/contract/CDCL2NGXHLTX5B76LAFQZGXNAN6Y46OP4RNIVBHZZOQYL6ESN35O75S6)
+
+*(Click to view real-time smart contract data)*
+
+---
+
+## 🎯 Vision & Use Cases
+
+**Our Vision:** Eliminate academic fraud, tear down publishing paywalls, and open a natively verifiable, decentralized hub for global research.
+
+### Core Use Cases:
+1. **Academic Papers:** Timestamping discoveries to prove priority logically and permanently.
+2. **University Degrees:** Ensuring graduate credentials cannot be forged or purchased.
+3. **Peer Review Transparency:** Storing verifiable hashes of peer-review comments and milestones.
+4. **Funding Proofs:** Showcasing secure grant allocations linked to immutable research progress.
+
+---
+
+## 🚧 Roadmap & Future Plans
+
+- [ ] **IPFS Integration:** Store full research PDFs directly on IPFS, saving CID reference safely on-chain.
+- [ ] **QR Code Verification:** 1-click generation of scannable citations embedding the verification state.
+- [ ] **Decentralized Peer Review (DAO):** Tokenize the peer-review process via Stellar assets.
+- [ ] **RBAC Security Upgrades:** Enforce institutional-level access controls for designated publishers only.
+
+---
+
+## ⚙️ Environment Setup & Quick Start
+
+### A. Prerequisites
+1. **Install Rust:**
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
+2. **Install Soroban CLI:**
+   ```bash
+   cargo install --locked soroban-cli
+   ```
+3. **Add WASM Target:**
+   ```bash
+   rustup target add wasm32-unknown-unknown
+   ```
+
+### B. Smart Contract Compilation
+Clone the repository:
+```bash
+git clone https://github.com/AabirManik/AcademicPublishingPlatform.git
+cd AcademicPublishingPlatform
+```
+Build and optimize the contract:
+```bash
+soroban contract build
+soroban contract optimize --wasm target/wasm32-unknown-unknown/release/contract.wasm
+```
+
+### C. Deployment & Invocation
+Deploy to the Stellar Testnet:
+```bash
+soroban contract deploy \
+  --wasm target/wasm32-unknown-unknown/release/contract.wasm \
+  --source <YOUR_ACCOUNT_NAME> \
+  --network testnet
+```
+Publish an academic document hash:
+```bash
+soroban contract invoke \
+  --id CDCL2NGXHLTX5B76LAFQZGXNAN6Y46OP4RNIVBHZZOQYL6ESN35O75S6 \
+  --source <SOURCE_ACCOUNT> \
+  --network testnet \
+  -- publish_paper --doc_hash "sha256_hash_here" --author "Aabir Manik"
+```
 
 ---
 
 ## 👨‍💻 Author
 
-Aabir Manik
-🚀 Aspiring Developer | Blockchain Enthusiast
+**Aabir Manik**
 
----
-
-## 📜 License
-
-MIT License
-
----
-
-## ⭐ Support
-
-If you like this project:
-
-👉 Star ⭐ the repo
-👉 Share with others
-👉 Build on top of it
-
----
-
-
-## 💡 Built for Innovation
-
-Perfect for:
-
-* Hackathons 🏆
-* Blockchain projects
-* Research tools
-* Web3 startups
-
----
-
-# 🌟 “Decentralize Knowledge. Empower Innovation.”
-<img width="1911" height="907" alt="stellar proof" src="https://github.com/user-attachments/assets/ba006665-c388-46a5-a714-022cc490237b" />
-
+*Blockchain Developer | Soroban & Stellar Ecosystem Enthusiast*
+- **GitHub:** [@AabirManik](https://github.com/AabirManik)
