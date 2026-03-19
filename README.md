@@ -46,11 +46,41 @@ Traditional blockchains face exorbitant gas fees making mass-publishing unviable
 
 Our solution is elegantly divided into high-speed on-chain capabilities and flexible off-chain access:
 
+### High-Level Flow
+
+```mermaid
+graph TD
+    classDef default fill:#1E232E,stroke:#4E5A73,stroke-width:2px,color:#FFFFFF,font-family:sans-serif;
+    classDef network fill:#141821,stroke:#3B455B,stroke-width:2px,color:#A0AEC0;
+    classDef contract fill:#283142,stroke:#5B6B8A,stroke-width:1.5px,color:#E2E8F0;
+    
+    A[Blockchain<br/>Stellar Testnet]:::network
+    B([User / Client]):::network
+    
+    A ~~~ B
+    
+    B -- "1. Request / 5. Result" --> C
+    
+    subgraph Execution["Execution Flow"]
+        direction TB
+        C["Academic Publisher<br/>Soroban Smart Contract"]:::contract
+        C -- "2. Verify Publication" --> D["Hash Verification Engine"]:::contract
+        D -- "3. Query Storage" --> E{"Check Ledger"}
+        style E fill:#1E232E,stroke:#4E5A73,stroke-width:2px,color:#FFFFFF,shape:diamond
+        
+        E -- "Found" --> F["Contract Instance Storage"]:::contract
+        E -- "Author Info" --> G["Publication Metadata"]:::contract
+    end
+    
+    style Execution fill:#2D3545,stroke:#3B455B,color:#FFFFFF
+```
+
 ### 1. Smart Contract (On-chain) Flow
 The core logic is written cleanly in a Rust Smart Contract (`AcademicPublisher`). It contains three main paths:
 - `publish_paper(env, doc_hash, author)`: Permanently locks the unique document hash to the verifiable author.
 - `verify_publication(env, doc_hash)`: Queries the on-chain storage to instantly authenticate if a document hash exists.
 - `get_author(env, doc_hash)`: Identifies the original publisher/author of a verified document hash.
+
 
 ### 2. Data Structure & Immutability
 The platform maps records using Soroban's native `Map<String, String>` directly into the instance storage. This precise design guarantees `O(1)` lookups and absolute mutability resistance.
@@ -78,7 +108,8 @@ Institutions generate their own document hashes (SHA-256) via the frontend, ensu
 ### 📸 Smart Contract Dashboard
 > *Live activity and on-chain details directly from Stellar Expert:*
 
-[![Smart Contract Dashboard](https://image.thum.io/get/width/1000/crop/800/https://stellar.expert/explorer/testnet/contract/CDCL2NGXHLTX5B76LAFQZGXNAN6Y46OP4RNIVBHZZOQYL6ESN35O75S6)](https://stellar.expert/explorer/testnet/contract/CDCL2NGXHLTX5B76LAFQZGXNAN6Y46OP4RNIVBHZZOQYL6ESN35O75S6)
+[![Smart Contract Dashboard](<img width="1911" height="907" alt="566147397-ba006665-c388-46a5-a714-022cc490237b" src="https://github.com/user-attachments/assets/b0112667-2d72-4c36-a8fb-1cf51b912153" />
+)
 
 *(Click to view real-time smart contract data)*
 
