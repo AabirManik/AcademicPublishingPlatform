@@ -147,7 +147,7 @@ This platform:
 
 ## 👨‍💻 Author
 
-**Your Name**
+Aabir Manik
 🚀 Aspiring Developer | Blockchain Enthusiast
 
 ---
@@ -168,6 +168,7 @@ If you like this project:
 
 ---
 
+
 ## 💡 Built for Innovation
 
 Perfect for:
@@ -180,3 +181,5 @@ Perfect for:
 ---
 
 # 🌟 “Decentralize Knowledge. Empower Innovation.”
+<img width="1911" height="907" alt="stellar proof" src="https://github.com/user-attachments/assets/ba006665-c388-46a5-a714-022cc490237b" />
+
